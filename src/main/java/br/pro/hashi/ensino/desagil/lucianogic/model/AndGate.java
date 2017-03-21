@@ -23,8 +23,8 @@ public class AndGate extends Gate {
 
 	@Override
 	protected void doConnect(Emitter emitter, int index) {
-			nandGate1.connect(emitter, 0);
-			nandGate1.connect(emitter, 1);
+			nandGate1.connect(emitter, index);
+			
 
 			
 			
