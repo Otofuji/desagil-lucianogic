@@ -27,13 +27,12 @@ public class XorGate extends Gate {
 	@Override
 	protected void doConnect(Emitter emitter, int index) {
 		
-			nandGate1.connect(emitter, 0);
-			nandGate1.connect(emitter, 1);
+			nandGate1.connect(emitter, index);
 	
-			nandGate2.connect(emitter,  0);
+			nandGate2.connect(emitter,  index);
 			nandGate2.connect(nandGate1, 1);
 			
-			nandGate3.connect(emitter,  1);
+			nandGate3.connect(emitter,  index);
 			nandGate3.connect(nandGate1, 0);
 		}	
 		
