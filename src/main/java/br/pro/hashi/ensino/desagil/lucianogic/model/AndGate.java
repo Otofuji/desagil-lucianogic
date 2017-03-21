@@ -2,6 +2,7 @@ package br.pro.hashi.ensino.desagil.lucianogic.model;
 
 public class AndGate extends Gate {
 	private Emitter[] emitters;
+	private NandGate nandGate;
 
 	public AndGate() {
 		super(2);
