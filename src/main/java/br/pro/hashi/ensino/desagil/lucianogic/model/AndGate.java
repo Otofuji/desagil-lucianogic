@@ -11,6 +11,9 @@ public class AndGate extends Gate {
 		nandGate1 = new NandGate();
 		nandGate2 = new NandGate();
 		
+		nandGate2.connect(nandGate1,  0);
+		nandGate2.connect(nandGate1, 1);
+		
 	}
 
 	@Override
@@ -23,8 +26,7 @@ public class AndGate extends Gate {
 			nandGate1.connect(emitter, 0);
 			nandGate1.connect(emitter, 1);
 
-			nandGate2.connect(nandGate1,  0);
-			nandGate2.connect(nandGate1, 1);
+			
 			
 		
 		
