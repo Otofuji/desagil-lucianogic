@@ -2,41 +2,44 @@
 package br.pro.hashi.ensino.desagil.lucianogic.model;
 
 public class MuxGate extends Gate {
-	private NotGate notGate;
-	private AndGate andGate1;
-	private AndGate andGate2;
-	private OrGate orGate;
+	private NandGate nandGate1;
+	private NandGate nandGate2;
+	private NandGate nandGate3;
+	private NandGate nandGate4;
 
 	public MuxGate() {
 		super(3);
-		notGate = new NotGate();
-		andGate1 = new AndGate();
-		andGate2 = new AndGate();
-		orGate = new OrGate();
+		nandGate1 = new NandGate();
+		nandGate2 = new NandGate();
+		nandGate3 = new NandGate();
+		nandGate4 = new NandGate();
 		
-		orGate.connect(andGate1, 0);
-		orGate.connect(andGate2, 1);
+		nandGate4.connect(nandGate2, 0);
+		nandGate4.connect(nandGate3, 1);
+		
 		
 	}
 
 	@Override
 	public boolean read() {
-		return orGate.read();
+		return nandGate4.read();
 	}
 
 	@Override
 	protected void doConnect(Emitter emitter, int index) {
 		
-			notGate.connect(emitter, 2);
-			
-			andGate1.connect(notGate, 0);
-			andGate1.connect(emitter, 1);
-	
-			andGate2.connect(emitter,  2);
-			andGate2.connect(emitter, 1);
-			
-		}	
-		
-		
+		if (index == 0){
+			nandGate2.connect(emitter, 0);
+			nandGate2.connect(nandGate1, 1);
+		}
+		else if (index == 1){
+			nandGate3.connect(emitter, 1);
+		}
+		else if (index == 2) {
+			nandGate1.connect(emitter, 0);
+			nandGate1.connect(emitter, 1);
+			nandGate3.connect(emitter, 0);
+		}
 	}
+}
 
