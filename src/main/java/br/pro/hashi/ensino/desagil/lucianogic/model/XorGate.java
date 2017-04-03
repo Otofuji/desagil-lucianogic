@@ -9,7 +9,7 @@ public class XorGate extends Gate {
 	public XorGate() {
 		super(2);
 		
-		name = "Xor";
+		name = "XorGate";
 
 		nandLeft = new NandGate();
 

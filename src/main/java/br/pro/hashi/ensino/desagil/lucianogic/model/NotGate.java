@@ -7,7 +7,7 @@ public class NotGate extends Gate {
 	public NotGate() {
 		super(1);
 		nandGate = new NandGate();
-		name = "Not";
+		name = "NotGate";
 	}
 
 	@Override

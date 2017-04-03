@@ -8,6 +8,7 @@ public abstract class Gate implements Receiver, Emitter{
 		this.size = size;
 	}
 	
+	
 	public String toString() {
 		return name;
 	}

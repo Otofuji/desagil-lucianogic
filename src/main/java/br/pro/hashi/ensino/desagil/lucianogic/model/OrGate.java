@@ -8,7 +8,7 @@ public class OrGate extends Gate {
 	public OrGate() {
 		super(2);
 		
-		name = "Or";
+		name = "OrGate";
 
 		nandTop = new NandGate();
 
