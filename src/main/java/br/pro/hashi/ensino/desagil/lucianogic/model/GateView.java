@@ -10,17 +10,22 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
-
+import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 
 
 import javax.swing.JCheckBox;
+import javax.swing.JColorChooser;
 
 
-public class GateView extends FixedPanel implements KeyListener, ItemListener {
+public class GateView extends FixedPanel implements KeyListener, ItemListener, MouseListener {
 	
 	private Image image;
 
@@ -48,6 +53,16 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener {
 		public GateView(Gate gate){
 			super(370, 220);
 			this.gate = gate;
+			super.addMouseListener(this);
+			Color color = new Color(250, 100, 17);
+			
+			int r = color.getRed();
+			int g = color.getGreen();
+			int bRgb = color.getBlue();
+			LED Led = new LED(r, g, bRgb);
+			
+			
+			
 			
 			image = loadImage(gate.toString());
 			
@@ -82,8 +97,37 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener {
 		}
 		
 				
+		@Override
+		public void mouseClicked(MouseEvent e) {
+		   int x = e.getX();
+		   int y = e.getY();
+			
+			if (x >= 250 || x <= 350 || y >= 60 || y <= 160){
+				Color color = JColorChooser.showDialog(this, null, null);
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
 			
 
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+
+		}
+		
 
 
 		@Override
@@ -134,10 +178,11 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener {
 			return icon.getImage();
 		}
 		
+	
 		@Override
 		public void paintComponent(Graphics g) {
 			g.drawImage(image, 90, 80, 150, 100, null);
-			//g.setColor();
+			
 			g.fillOval(300, 110, 50, 50);
 			// Evita bugs visuais em alguns sistemas operacionais.
 			getToolkit().sync();
