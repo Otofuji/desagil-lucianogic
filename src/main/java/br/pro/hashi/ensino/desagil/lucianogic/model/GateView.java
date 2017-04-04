@@ -200,12 +200,15 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 			color = new Color(led.getR(),led.getG(),led.getB());
 			if(led.isOn() == true){
 				g.setColor(color);
-				g.fillOval(300, 100, 50, 50);
+				g.fillOval(300, 100, 45, 65);
+			    g.fillRect(297, 150, 50, 17); 
+				
 			}
 			
 			else{
 				g.setColor(Color.BLACK);
-				g.fillOval(300, 100, 50, 50);
+				g.fillOval(300, 100, 45, 65);
+			    g.fillRect(297, 150, 50, 17);  
 				
 			}
 			// Evita bugs visuais em alguns sistemas operacionais.
