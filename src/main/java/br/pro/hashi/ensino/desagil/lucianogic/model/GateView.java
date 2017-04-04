@@ -49,6 +49,8 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 			
 		private Gate gate;
 		private JCheckBox resultado;
+		private LED led;
+		private Color color;
 			
 		public GateView(Gate gate){
 			super(370, 220);
@@ -58,8 +60,8 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 			
 			int r = color.getRed();
 			int g = color.getGreen();
-			int bRgb = color.getBlue();
-			LED Led = new LED(r, g, bRgb);
+			int b = color.getBlue();
+			led = new LED(r, g, b);
 			
 			
 			
@@ -90,9 +92,9 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 				
 				
 			}
-			resultado.setSelected(gate.read());
-			add(resultado,340,110,50,25);
 			
+			
+			led.connect(gate, 0);
 			//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		}
 		
@@ -102,9 +104,18 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 		   int x = e.getX();
 		   int y = e.getY();
 			
-			if (x >= 250 || x <= 350 || y >= 60 || y <= 160){
-				Color color = JColorChooser.showDialog(this, null, null);
+			if (x >= 250 && x <= 350 && y >= 60 && y <= 160){
+				color = JColorChooser.showDialog(this, null, null);
+
+				int r = color.getRed();
+				int g = color.getGreen();
+				int b = color.getBlue();
+				led = new LED(r, g, b);
+				led.connect(gate, 0);
+				repaint();
+				
 			}
+	
 		}
 
 		@Override
@@ -170,7 +181,9 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 				listaSwitch.get(i).setOn(true);
 			}
 			resultado.setSelected(gate.read());
-
+			repaint();
+			
+			
 		}
 		private Image loadImage(String filename) {
 			URL url = getClass().getResource("/img/" + filename + ".png");
@@ -178,12 +191,22 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 			return icon.getImage();
 		}
 		
-	
+		
 		@Override
 		public void paintComponent(Graphics g) {
-			g.drawImage(image, 90, 80, 150, 100, null);
 			
-			g.fillOval(300, 110, 50, 50);
+			g.drawImage(image, 70, 50, 200, 150, null);
+			color = new Color(led.getR(),led.getG(),led.getB());
+			if(led.isOn() == true){
+				g.setColor(color);
+				g.fillOval(300, 100, 50, 50);
+			}
+			
+			else{
+				g.setColor(Color.BLACK);
+				g.fillOval(300, 100, 50, 50);
+				
+			}
 			// Evita bugs visuais em alguns sistemas operacionais.
 			getToolkit().sync();
 	    }
