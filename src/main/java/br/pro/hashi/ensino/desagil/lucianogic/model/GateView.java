@@ -113,6 +113,7 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 				led = new LED(r, g, b);
 				led.connect(gate, 0);
 				repaint();
+				getToolkit().sync();
 				
 			}
 	
@@ -182,7 +183,7 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 			}
 			resultado.setSelected(gate.read());
 			repaint();
-			
+			getToolkit().sync();
 			
 		}
 		private Image loadImage(String filename) {
@@ -209,5 +210,6 @@ public class GateView extends FixedPanel implements KeyListener, ItemListener, M
 			}
 			// Evita bugs visuais em alguns sistemas operacionais.
 			getToolkit().sync();
+			
 	    }
 }
